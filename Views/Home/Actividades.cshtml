@@ -1,0 +1,94 @@
+<style>
+    .container
+    {
+        width: 50%;
+        position: relative;
+        right: 50px;
+        
+    }
+    h1, h3
+    {
+        text-align: center;
+    }
+    .button{
+        margin-left: 350px;
+    }
+    .leave
+    {
+        margin-left: 350px;
+    }
+</style>
+<a href="/home">Home</a>
+<a href="/logout">Logout</a>
+
+@{
+    bool isAttending = false;
+}
+
+@if(ViewBag.CurrentUser.UserId == ViewBag.PlannedAct.Creator.UserId)
+        {
+          isAttending = true;  
+        <a href="/delete/@ViewBag.PlannedAct.ActividadId"><button>Delete</button></a>
+             
+        }
+@foreach(var x in ViewBag.PlannedAct.Guests)
+        {
+            @if(x.UserId == ViewBag.CurrentUser.UserId)
+            {
+                isAttending = true;
+            }
+              
+            }
+            @if(isAttending == true && ViewBag.CurrentUser.UserId != ViewBag.PlannedAct.Creator.UserId)
+            {
+                <a href="/leave/@ViewBag.PlannedAct.ActividadId"><button>Leave</button></a>
+                    isAttending = false;  
+            }
+
+            else if(isAttending == false)
+            {
+                <a href="/join/@ViewBag.PlannedAct.ActividadId"><button>Join</button></a>
+            }
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+        
+
+
+
+<h1 style = "color:green;">@ViewBag.PlannedAct.Name</h1>
+<h3 style = "color:red;">@ViewBag.PlannedAct.Date.ToString("MMMM, dd, yyyy")</h3>
+<h3 style = "color:green;">Coordinated by @ViewBag.PlannedAct.Creator.Name</h3>
+
+<h4 style = "color:red;">Description: </h4>
+<div style = "border: 1px solid green">
+<div .container> 
+<h6>@ViewBag.PlannedAct.Description</h6>
+</div>   
+</div>
+
+<br>
+
+<h4 style = "color:green;">Participants: </h4>
+
+@{
+    <ul>
+    @foreach(var i in ViewBag.PlannedAct.Guests)
+    {
+        <li>@i.Guest.Name</li>
+    }
+    </ul>    
+
+    
+}
+   
+
+
+

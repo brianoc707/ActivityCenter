@@ -1,0 +1,70 @@
+﻿<a href="/logout">Logout</a> 
+<h1>Activities</h1>
+
+@{
+    bool isAttending = false;
+}
+
+@{
+    <table class="table table-striped">
+    <tr>
+        <th>Activity</th>
+        <th>Date & Time</th>
+        <th>Duration</th>
+        <th>Coordinator</th>
+        <th># of Participants</th>
+        <th>Action</th>
+    </tr>
+   
+    @foreach(var i in ViewBag.AllAct)
+    {
+        @if(i.Date >= ViewBag.DateTime)
+        {
+            <tr>
+            <td><a href="/actividad/@i.ActividadId">@i.Name</a></td>
+            <td>@i.Date.ToString("dddd, dd MMMM yyyy hh:mm tt")</td>
+            <td>@i.DurationInt @i.DurationString</td>
+            <td>@i.Creator.Name</td>
+            <td>@i.Guests.Count</td>
+            <td>
+                @if(ViewBag.CurrentUser.UserId == i.Creator.UserId)
+                {
+                <a href="/delete/@i.ActividadId">Delete</a> 
+                }
+
+                else
+                {
+                    
+                
+                foreach(var x in i.Guests)
+                {
+                    if(x.UserId == ViewBag.CurrentUser.UserId)
+                    {
+                        isAttending = true;
+                    }
+                    
+                    }
+                    if(isAttending == true)
+                    {
+                        <a href="/leave/@i.ActividadId">Leave</a>
+                            isAttending = false;  
+                    }
+
+                    else if(isAttending == false)
+                    {
+                        <a href="/join/@i.ActividadId">Join</a>
+                    }
+                }
+
+
+
+
+
+            </td>
+            </tr>
+            }
+        }
+            </table>
+            
+        }
+<a href="/new/@ViewBag.CurrentUser.UserId"><button>Plan an Activity</button></a>

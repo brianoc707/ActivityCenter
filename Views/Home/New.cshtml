@@ -1,0 +1,43 @@
+<a href="/home">Home</a>
+<a href="/logout">Logout</a> 
+<h1 style = "color: green">Create an Activity</h1>
+
+
+@model Actividad
+ <form action ="/plan" method="post">
+        <div class= "form-group">
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <label  asp-for="Name"></label>
+        <input class = "form-control" asp-for="Name">
+        </div>
+        <div class="form-group">
+        <span asp-validation-for="Date" class="text-danger"></span>
+        <label asp-for="Date"></label>
+        <input type="datetime-local" class = "form-control" asp-for="Date">
+        </div>
+        
+        <div class="form-group">
+        <span asp-validation-for="DurationInt" class="text-danger"></span>
+        <label asp-for="DurationInt"></label>
+        <input class = "form-control" asp-for="DurationInt">
+        </div>
+        <div class="form-group">
+        <select asp-for="DurationString">
+        <option value = "Days">Days</option>
+        <option value = "Hours">Hours</option>
+        <option value = "Minutes">Minutes</option>
+        </select>
+        </div>
+         <div class="form-group">
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <label asp-for="Description"></label>
+        <input class = "form-control" asp-for="Description">
+        </div>
+        
+
+        
+        
+        <input type="submit" value="Create">
+        
+      
+    </form>
