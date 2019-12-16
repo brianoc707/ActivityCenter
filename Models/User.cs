@@ -23,7 +23,7 @@
             [Required]
             [MinLength(8, ErrorMessage="Password must be 8 characters or longer!")]
             [DataType(DataType.Password)]
-            [RegularExpression("(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]
+            [RegularExpression("(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage="Password must contain at least one number, one letter, and one special character")]
             public string Password { get; set; }
            
             public DateTime CreatedAt {get;set;} = DateTime.Now;
